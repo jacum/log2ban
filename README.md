@@ -42,7 +42,8 @@ Clone log2ban somewhere
 
 In log2ban.py, adjust the following parameters:
 
-ECHO_LOG_COMMAND = "tail -f /var/log/nginx/access.log"
+    ECHO_LOG_COMMAND = "tail -f /var/log/nginx/access.log"
+    
 This can be any command that feeds log file (preferably, in real time) to log2ban.
 If using 'tail', don't forget to restart log2ban every time logs are rotated. Otherwise 'tail' feed stops.
 
@@ -79,15 +80,18 @@ Install scripts
 
 
 Start MongoDB
+
 > sudo /etc/init.d/mongodb start
 
 Start log2ban
+
 > sudo /etc/init.d/log2ban start
 
 Add this line to root cron script to update ban lists, e.g. every 5 minutes:
     */5 * * * * /opt/log2ban/ipset_control.sh update
 
 Let it run for a while. Check if any IPs are blocked:
+
 > sudo /opt/log2ban/ipset_control.sh
 
 Now, final thing - connect it all to iptables. Add the following line
